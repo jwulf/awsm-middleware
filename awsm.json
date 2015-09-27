@@ -1,0 +1,14 @@
+{
+  "name": "middleware",
+  "version": "0.0.1",
+  "location": "https://github.com/jwulf/awsm-middleware",
+  "author": "Joshua Wulf <sitapati@worldsankirtan.net>",
+  "description": "Middleware for your JAWS projects",
+  "resources": {
+    "cloudFormation": {
+      "LambdaIamPolicyDocumentStatements": [],
+      "ApiGatewayIamPolicyDocumentStatements": [],
+      "Resources": {}
+    }
+  }
+}
