@@ -4,24 +4,13 @@ Middleware for your JAWS project, based on segment.io
 Here's how you use it in your `handler.js`:
 
 ```
-'use strict';
+var Authorization = require('../../users').Authorization;
+var Logging = require('../../loggly').Logging;
 
-/**
- * AWS Module: Action: Lambda Handler
- * "Your lambda functions should be a thin wrapper around your own separate
- * modules, to keep your code testable, reusable and AWS independent"
- */
-
-require('../../jaws-core-js/env');
-var Middleware = require('../../middleware');
-
-// now require all other middleware-enabled modules
+var Middleware = require('../../middleware')(Authorization, Logging);
 
 // Modularized Code
 var action = require('./index.js');
-
-// if the lambda function is Middleware-aware, inject the Middleware object
-if (action.Middleware) action.Middleware = Middleware;
 
 // Lambda Handler
 module.exports.handler = function (event, context) {
@@ -31,4 +20,15 @@ module.exports.handler = function (event, context) {
     });  
   });
 }
+```
+
+Here's how you implement a middleware function:
+
+```
+module.exports.myMiddleWareFunction = function (event, context, next){
+  // Do your thing - decorate, decide, whatever
+  if (we.want.to.fail) { return context.fail('Nope!'); }  
+  if (we.want.to.keep.going) { next(); }
+}
+
 ```
