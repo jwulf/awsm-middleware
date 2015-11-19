@@ -1,6 +1,10 @@
 module.exports = function (handlers) {
 	var ware = require('ware');
 	var middleware = ware();
-	arguments.forEach(middleware.use);
+	
+	for (var m in arguments) {
+		middleware.use(arguments[m]);
+	}
+	
 	return middleware; 
 }
